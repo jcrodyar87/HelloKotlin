@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     }
 
     private fun speak(){
-        var message:String = findViewById<TextView>(R.id.tvHello).text.toString()
+        var message:String = findViewById<TextView>(R.id.tvMessage).text.toString()
 
         tts!!.speak(message, TextToSpeech.QUEUE_FLUSH, null, "")
     }
@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     override fun onInit(status: Int) {
         if( status == TextToSpeech.SUCCESS)
         {
-            findViewById<TextView>(R.id.tvHello).text = "Hello Kotlin!"
+            findViewById<TextView>(R.id.tvMessage).text = "Hello Kotlin!"
             tts!!.setLanguage(Locale.US)
         }else{
-            findViewById<TextView>(R.id.tvHello).text = "Not available!"
+            findViewById<TextView>(R.id.tvMessage).text = "Not available!"
         }
     }
 }
