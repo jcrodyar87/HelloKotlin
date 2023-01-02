@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import java.util.*
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
-    var tts: TextToSpeech? = null
+
+    private var tts: TextToSpeech? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,7 +22,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     }
 
     private fun speak(){
-        var message:String = findViewById<TextView>(R.id.tvMessage).text.toString()
+        var message:String = findViewById<EditText>(R.id.etMessage).text.toString()
+
+        if(message.isEmpty()){
+           message = "Enter something!"
+        }
 
         tts!!.speak(message, TextToSpeech.QUEUE_FLUSH, null, "")
     }
@@ -27,10 +34,18 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     override fun onInit(status: Int) {
         if( status == TextToSpeech.SUCCESS)
         {
-            findViewById<TextView>(R.id.tvMessage).text = "Hello Kotlin!"
-            tts!!.setLanguage(Locale.US)
+            findViewById<TextView>(R.id.tvMessage).text = getString(R.string.ready)
+            tts!!.language = Locale("US")
         }else{
-            findViewById<TextView>(R.id.tvMessage).text = "Not available!"
+            findViewById<TextView>(R.id.tvMessage).text = getString(R.string.not_available)
         }
+    }
+
+    override fun onDestroy() {
+        if(tts != null){
+            tts!!.stop()
+            tts!!.shutdown()
+        }
+        super.onDestroy()
     }
 }

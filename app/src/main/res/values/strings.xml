@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hello Kotlin</string>
+    <string name="enter_something">Enter something!</string>
+    <string name="not_available">Not available!</string>
+    <string name="play">Play</string>
+    <string name="ready">Ready!</string>
 </resources>
