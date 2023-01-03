@@ -3,6 +3,4 @@
 ## Description
 Enter something and push button play to use text to speech
 
-```
- <video src='demo.mp4' width=180/>
-```
+![](https://github.com/jcrodyar87/HelloKotlin/demo.gif)
